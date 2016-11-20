@@ -175,12 +175,12 @@ sub processFile {
 sub printUsage {
 	print <<ENDUSAGE;
   $0
-    [-b | --baseurl <string>]      - The baseurl to add to every link
+    [-b | --baseurl <string>     ] - The baseurl to add to every link
     [-c | --context | --nocontext] - Print contextual links on each file
-    [-d | --docdir <string>]       - The document root directory
-    [-h | --help]                  - Print this help
-    [-t | --toclink <string>]      - The link to the table of content page
-    [-v | --verbose]               - Print additional information during processing
+    [-d | --docdir <string>      ] - The document root directory
+    [-h | --help                 ] - Print this help
+    [-t | --toclink <string>     ] - The link to the table of content page
+    [-v | --verbose              ] - Print additional information during processing
 
 ENDUSAGE
 
@@ -189,18 +189,20 @@ ENDUSAGE
 
 sub main {
 
-	my ( $baseurl, $contextLinks, $dir, $help, $tocLink, $verbose );
+	my ( $baseurl, $contextLinks, $docdir, $help, $tocLink, $verbose );
 
 	GetOptions(
 		'baseurl=s' => \$baseurl,
 		'context!'  => \$contextLinks,
-		'docdir=s'  => \$dir,
+		'docdir=s'  => \$docdir,
 		'help'      => \$help,
 		'toclink!'  => \$tocLink,
 		'verbose!'  => \$verbose
 	);
 
-	printUsage() if ($help);
+	printUsage() if $help;
+	$dir     = $docdir  if $docdir;
+	$relLink = $baseurl if $baseurl;
 
 	opendir( my $dh, $dir ) || die "Cannot open $dir\n";
 	my @files = sort { $a <=> $b } readdir($dh);
