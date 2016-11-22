@@ -57,9 +57,15 @@ sub addError {
 	my $self = shift;
 	my $err  = shift;
 
-	$self->{msg}     = $self->{msg} . $err;
+	$self->{msg}     = $self->{msg} . "\n" . $err;
 	$self->{success} = 0;
 	return $self;
+}
+
+sub getError {
+	my $self = shift;
+
+	return $self->{msg};
 }
 
 #
@@ -91,6 +97,8 @@ sub setContextFlag {
 sub setDocDir {
 	my $self   = shift;
 	my $docdir = shift;
+
+	return if $docdir =~ /^\s*$/;
 
 	# Make sure that the docdir ends with a slash
 	$docdir = $docdir . "/" unless $docdir =~ /\/$/;
@@ -170,7 +178,8 @@ sub writeContextLinks {
 		$tocLink =
 		    "&nbsp;" x 5 . "[ ["
 		  . $self->{toctext} . "]("
-		  . $self->{toclink} . ") &uarr; ]";
+		  . $self->{toclink}
+		  . ") &uarr; ]";
 	}
 	my $outValue =
 	  "<p align='center'>" . ( $prev ? "[&larr; $prev ]" : "" ) . $tocLink;
@@ -338,7 +347,7 @@ sub validateFiles {
 
 		# Ignore file that starts with a dot (.).
 		$self->verbose("Checking if file '$file' starts with a dot");
-		next if ( $file =~ /^\./ );
+		next if ( basename($file) =~ /^\./ );
 		$self->verbose("Adding file '$file' to the list of valid files");
 		push( @validFiles, $self->{docdir} . $file );
 	}
