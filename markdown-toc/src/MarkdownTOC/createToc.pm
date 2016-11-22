@@ -261,7 +261,7 @@ sub createToc {
 		print $header->{'level'} == 1
 		  ? "* [" . $header->{'header'} . "](" . $link . ")\n"
 		  : " " x ( 2 * $header->{'level'} )
-		  . "*<sub>["
+		  . "* <sub>["
 		  . $header->{'header'} . "]("
 		  . $link
 		  . ")</sub>\n";
