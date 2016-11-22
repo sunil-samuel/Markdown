@@ -5,7 +5,7 @@ http://www.sunilsamuel.com
 </small>
 </p>
 
-**<p align='center' style='font-size:18px;'>Markdown Table of Contents</p>**
+<font size="8">**<p align='center'><font size="8" color="red">Markdown Table of Contents</p>**</font>
 
 # Overview
 
@@ -23,7 +23,8 @@ headers into separate files such that each file is a section of the document.
 
 The script will:
 
-1. Create a list of headers in the form of a Table of Content
+1. Create a list of headers in the form of a Table of Content (TOC).  The TOC is is outputted
+to the screen and should be copied into the root markdown page.
 2. Create a section at the top and end of each markdown file to navigate to previous, next,
 and the Table of Content files (optional)
 
@@ -39,6 +40,7 @@ The script is run with several command line parameters.
     [-h | --help                   ] - Print this help
     [-l | --list <file1>...<fileN> ] - The list of files to process in order
     [-t | --toclink <string>       ] - The link to the table of content page
+    [-o | --toctext <string>       ] - The text to the table of content link (default: toc)
     [-v | --verbose                ] - Print additional information during processing
 ```
 >**-b | --baseurl &lt;string&gt;**<br>
@@ -81,3 +83,34 @@ points back to the toc page.
 ```sh
 Example: --toclink /resources/documentation/Readme.md
 ```
+
+>**-o | --toctext &lt;string&gt;**<br>
+The link title for the table of contents.  This is used to create the link back to the table
+of content page from within each markdown page.
+
+>default: TOC
+```sh
+Example: --toctext "Table of Contents"
+```
+
+>**-v | --verbose**<br>
+Output additional messages during processing of files
+
+## Examples
+
+```sh
+create-toc.pl --baseurl /resources/documentation --nocontext --docdir ../docs  --toclink Readme.md
+```
+
+```sh
+create-toc.pl --baseurl /resources/docs --context --list file1.md file2.md --toclink /docs/Readme.md
+```
+
+# Example
+The following Table of Content is created using this script.  The markdown pages in the 
+test/documentation directory are used to generate this TOC.
+
+<font size="8">**<p align='center'><font size="8" color="red">Table of Contents</p>**</font>
+
+
+

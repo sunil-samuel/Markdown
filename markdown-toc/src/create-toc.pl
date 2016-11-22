@@ -3,7 +3,7 @@
 use File::Basename;
 use Getopt::Long;
 
-my $dir = "../documentation";
+my $dir = "../test/documentation";
 
 my $relLink = "resources/documentation/";
 
@@ -189,15 +189,16 @@ ENDUSAGE
 
 sub main {
 
-	my ( $baseurl, $contextLinks, $docdir, $help, $tocLink, $verbose );
+	my ( $baseurl, $contextLinks, $list, $docdir, $help, $tocLink, $verbose );
 
 	GetOptions(
-		'baseurl=s' => \$baseurl,
-		'context!'  => \$contextLinks,
-		'docdir=s'  => \$docdir,
-		'help'      => \$help,
-		'toclink!'  => \$tocLink,
-		'verbose!'  => \$verbose
+		'baseurl=s'  => \$baseurl,
+		'context!'   => \$contextLinks,
+		'docdir=s'   => \$docdir,
+		'help'       => \$help,
+		'list=s{0,}' => \$list,
+		'toclink!'   => \$tocLink,
+		'verbose!'   => \$verbose
 	);
 
 	printUsage() if $help;
