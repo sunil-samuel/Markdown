@@ -52,10 +52,10 @@ sub main {
 
 	$createtoc->setDocDir("../test/documentation");
 	$createtoc->setVerbose(0);
-	$createtoc->setBaseUrl("/resources/documentation/");
+	$createtoc->setBaseUrl("/markdown-toc/test/documentation/");
 	$createtoc->setContextFlag(1);
-	$createtoc->setTocLink("/home/Readme.md");
-	$createtoc->setTocText("Home");
+	$createtoc->setTocLink("/markdown-toc/Readme.md#example");
+	$createtoc->setTocText("TOC");
 
 	$createtoc->process();
 
