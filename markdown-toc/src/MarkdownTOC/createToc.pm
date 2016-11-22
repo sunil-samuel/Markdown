@@ -183,10 +183,10 @@ sub writeContextLinks {
 		  . ") &uarr; ]";
 	}
 	my $outValue =
-	  "<p align='center'>" . ( $prev ? "[&larr; $prev ]" : "" ) . $tocLink;
+	  "<p align='center'>" . ( $prev ? "[ &larr; $prev ]" : "" ) . $tocLink;
 	if ($next) {
-		$outValue .= "&nbsp;" x 20 if ($prev);
-		$outValue .= "[ $next &rarr;]";
+		$outValue .= "&nbsp;" x 5 if ($prev);
+		$outValue .= "[ $next &rarr; ]";
 	}
 	$outValue .= "</p>";
 	print $out "<!--autoheader-->$outValue<!--/autoheader-->\n";
