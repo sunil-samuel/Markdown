@@ -66,8 +66,8 @@ sub main {
 	$createtoc->setVerbose($verbose);
 	$createtoc->setBaseUrl($baseurl);
 	$createtoc->setContextFlag($context);
-	$createtoc->setTocLink($toclink);
-	$createtoc->setTocText($toctext);
+	$createtoc->setTocLink($tocLink);
+	$createtoc->setTocText($tocText);
 	$createtoc->setDocList(@list);
 
 	$createtoc->process();

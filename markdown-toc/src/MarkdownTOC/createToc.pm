@@ -111,6 +111,7 @@ sub setDocDir {
 #
 sub setDocList {
 	my ( $self, @doclist ) = (@_);
+	return if !@doclist || scalar(@doclist) <= 0;
 	$self->{doclist} = \@doclist;
 	return $self;
 }

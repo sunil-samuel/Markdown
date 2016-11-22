@@ -113,12 +113,12 @@ test/documentation directory are used to generate this TOC.
 **<p align='center'>Table of Contents</p>**
 
 <!-- BEGIN HEADERS (copy into root page) -->
-* [Document Information](/markdown-toc/test/documentation/01. documenet-information.md#document-information)
-    * <sub>[Creator](/markdown-toc/test/documentation/01. documenet-information.md#creator)</sub>
-    * <sub>[Copyright](/markdown-toc/test/documentation/01. documenet-information.md#copyright)</sub>
-    * <sub>[Awareness](/markdown-toc/test/documentation/01. documenet-information.md#awareness)</sub>
-    * <sub>[Private](/markdown-toc/test/documentation/01. documenet-information.md#private)</sub>
-    * <sub>[Additional Information](/markdown-toc/test/documentation/01. documenet-information.md#additional-information)</sub>
+* [Document Information](/markdown-toc/test/documentation/01. document-information.md#document-information)
+    * <sub>[Creator](/markdown-toc/test/documentation/01. document-information.md#creator)</sub>
+    * <sub>[Copyright](/markdown-toc/test/documentation/01. document-information.md#copyright)</sub>
+    * <sub>[Awareness](/markdown-toc/test/documentation/01. document-information.md#awareness)</sub>
+    * <sub>[Private](/markdown-toc/test/documentation/01. document-information.md#private)</sub>
+    * <sub>[Additional Information](/markdown-toc/test/documentation/01. document-information.md#additional-information)</sub>
 * [Introduction](/markdown-toc/test/documentation/02. introduction.md#introduction)
     * <sub>[Purpose](/markdown-toc/test/documentation/02. introduction.md#purpose)</sub>
     * <sub>[Terminologies](/markdown-toc/test/documentation/02. introduction.md#terminologies)</sub>
