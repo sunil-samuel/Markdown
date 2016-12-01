@@ -59,7 +59,7 @@ sub main {
 	my $createtoc = MarkdownTOC::createToc->new();
 	if ( !$createtoc ) {
 		warn "Could not create toc\n";
-		$createtoc->getError();
+		warn $createtoc->getError() . "\n";
 	}
 
 	$createtoc->setDocDir($docdir);
@@ -71,6 +71,10 @@ sub main {
 	$createtoc->setDocList(@list);
 
 	$createtoc->process();
+	if ( !$createtoc ) {
+		warn "Error processing files\n";
+		warn $createtoc->getError() . "\n";
+	}
 }
 
 main;

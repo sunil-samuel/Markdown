@@ -57,6 +57,7 @@ sub addError {
 	my $self = shift;
 	my $err  = shift;
 
+	warn "$err\n";
 	$self->{msg}     = $self->{msg} . "\n" . $err;
 	$self->{success} = 0;
 	return $self;
@@ -127,9 +128,11 @@ sub setTocLink {
 }
 
 sub setTocText {
-	my $self = shift;
-	$self->{toctext} = shift;
-	return self;
+	my $self    = shift;
+	my $tocText = shift;
+	return if $tocText =~ /^\s*$/;
+	$self->{toctext} = $tocText;
+	return $self;
 }
 
 #
