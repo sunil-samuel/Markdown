@@ -179,11 +179,13 @@ sub writeContextLinks {
 	#Output the toc link.
 	my $tocLink = "";
 	if ( $self->{toclink} ) {
-		$tocLink =
-		    "&nbsp;" x 5 . "[ ["
-		  . $self->{toctext} . "]("
-		  . $self->{toclink}
-		  . ") &uarr; ]";
+		#$tocLink =
+		#    "&nbsp;" x 5 . "[ ["
+		#  . $self->{toctext} . "]("
+		#  . $self->{toclink}
+		#  . ") &uarr; ]";
+		$tocLink = "&nbsp;" x 5
+		  . "[ <a href='$self->{toclink}'>$self->{toctext}</a> &uarr; ]";
 	}
 	my $outValue =
 	  "<p align='center'>" . ( $prev ? "[ &larr; $prev ]" : "" ) . $tocLink;
@@ -225,23 +227,27 @@ sub createContextLinks {
 	for ( my $count = 0 ; $count < $totalFiles ; $count++ ) {
 		my ( $pLink, $nLink ) = ( undef, undef );
 		unless ( $count - 1 < 0 ) {
-			$pLink =
-			    "[" 
-			  . $fileHeaders[ $count - 1 ]{'header'} . "]("
-			  . $self->createLink(
-				$fileHeaders[ $count - 1 ]{'header'},
-				$fileHeaders[ $count - 1 ]{'file'}
-			  ) . ")";
+			$pLink = $self->createLink( $fileHeaders[ $count - 1 ]{'header'},
+				$self->replaceSpaces( $fileHeaders[ $count - 1 ]{'file'} ) );
+
+			#$pLink =
+			#  "["
+			#. $fileHeaders[ $count - 1 ]{'header'} . "]("
+			#. $self->createLink( $fileHeaders[ $count - 1 ]{'header'},
+			#	$self->replaceSpaces( $fileHeaders[ $count - 1 ]{'file'} ) )
+			#  . ")";
 		}
 
 		unless ( $count + 1 >= $totalFiles ) {
-			$nLink =
-			    "[" 
-			  . $fileHeaders[ $count + 1 ]{'header'} . "]("
-			  . $self->createLink(
-				$fileHeaders[ $count + 1 ]{'header'},
-				$fileHeaders[ $count + 1 ]{'file'}
-			  ) . ")";
+			$nLink = $self->createLink( $fileHeaders[ $count + 1 ]{'header'},
+				$self->replaceSpaces( $fileHeaders[ $count + 1 ]{'file'} ) );
+
+			#$nLink =
+			#    "["
+			#  . $fileHeaders[ $count + 1 ]{'header'} . "]("
+			#  . $self->createLink( $fileHeaders[ $count + 1 ]{'header'},
+			#		$self->replaceSpaces( $fileHeaders[ $count + 1 ]{'file'} ) )
+			#		  . ")";
 		}
 
 		$self->writeContextLinks( $fileHeaders[$count]{'file'}, $pLink,
@@ -261,7 +267,10 @@ sub createLink {
 		? $self->{baseurl} . basename($file)
 		: $file
 	);
-	$link . "#" . $self->normalizeHeader($header);
+
+	#$link . "#" . $self->normalizeHeader($header);
+	$link = "<a href='$link'>" . $self->normalizeHeader($header) . "</a>";
+	return $link;
 }
 
 sub createToc {
@@ -270,7 +279,9 @@ sub createToc {
 	my @headers = @{ $self->{headers} };
 	print "<!-- BEGIN HEADERS (copy into root page) -->\n";
 	foreach my $header (@headers) {
-		my $link = $self->createLink( $header->{'header'}, $header->{'file'} );
+		my $link =
+		  $self->createLink( $header->{'header'},
+			$self->replaceSpaces( $header->{'file'} ) );
 		print $header->{'level'} == 1
 		  ? "* [" . $header->{'header'} . "](" . $link . ")\n"
 		  : " " x ( 2 * $header->{'level'} )
@@ -281,6 +292,12 @@ sub createToc {
 	}
 	print "<!-- END HEADERS (copy into root page) -->\n";
 
+}
+
+sub replaceSpaces {
+	my ( $self, $text ) = (@_);
+	$text =~ s/ /%20/g;
+	return $text;
 }
 
 sub addToHeaders {
