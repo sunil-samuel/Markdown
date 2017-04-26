@@ -179,6 +179,7 @@ sub writeContextLinks {
 	#Output the toc link.
 	my $tocLink = "";
 	if ( $self->{toclink} ) {
+
 		#$tocLink =
 		#    "&nbsp;" x 5 . "[ ["
 		#  . $self->{toctext} . "]("
@@ -191,7 +192,10 @@ sub writeContextLinks {
 	  "<p align='center'>" . ( $prev ? "[ &larr; $prev ]" : "" ) . $tocLink;
 	if ($next) {
 		$outValue .= "&nbsp;" x 5 if ($prev);
+
+		#$outValue .= "[ <a href='";
 		$outValue .= "[ $next &rarr; ]";
+
 	}
 	$outValue .= "</p>";
 	print $out "<!--autoheader-->$outValue<!--/autoheader-->\n";
@@ -228,7 +232,8 @@ sub createContextLinks {
 		my ( $pLink, $nLink ) = ( undef, undef );
 		unless ( $count - 1 < 0 ) {
 			$pLink = $self->createLink( $fileHeaders[ $count - 1 ]{'header'},
-				$self->replaceSpaces( $fileHeaders[ $count - 1 ]{'file'} ) );
+				$self->replaceSpaces( $fileHeaders[ $count - 1 ]{'file'} ),
+				'html' );
 
 			#$pLink =
 			#  "["
@@ -240,7 +245,8 @@ sub createContextLinks {
 
 		unless ( $count + 1 >= $totalFiles ) {
 			$nLink = $self->createLink( $fileHeaders[ $count + 1 ]{'header'},
-				$self->replaceSpaces( $fileHeaders[ $count + 1 ]{'file'} ) );
+				$self->replaceSpaces( $fileHeaders[ $count + 1 ]{'file'} ),
+				'html' );
 
 			#$nLink =
 			#    "["
@@ -260,16 +266,18 @@ sub createContextLinks {
 # Using the file name, create the link given the baseurl parameter.
 #
 sub createLink {
-	my ( $self, $header, $file ) = (@_);
-
+	my ( $self, $header, $file, $type ) = (@_);
 	my $link = (
 		  $self->{baseurl}
 		? $self->{baseurl} . basename($file)
 		: $file
 	);
+	$link = $link . "#" . $self->normalizeHeader($header);
 
-	#$link . "#" . $self->normalizeHeader($header);
-	$link = "<a href='$link'>" . $self->normalizeHeader($header) . "</a>";
+	# The next line creates a html link.
+	if ( $type eq 'html' ) {
+		$link = "<a href='$link'>" . $self->normalizeHeader($header) . "</a>";
+	}
 	return $link;
 }
 
@@ -284,7 +292,7 @@ sub createToc {
 			$self->replaceSpaces( $header->{'file'} ) );
 		print $header->{'level'} == 1
 		  ? "* [" . $header->{'header'} . "](" . $link . ")\n"
-		  : " " x ( 2 * $header->{'level'} )
+		  : "\t" x ( $header->{'level'} - 1 )
 		  . "* <sub>["
 		  . $header->{'header'} . "]("
 		  . $link

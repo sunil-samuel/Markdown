@@ -15,11 +15,11 @@
 #
 # THIS IS FOR THE BRMS STUFF
 #
-(cd ../src;perl markdown-toc.pl \
-	--docdir "/Users/sunilsamuel/git/Work/RedHat/TKE/brms/service-sight-rules/resources/documentation" \
-	--noverbose --baseurl "/resources/documentation/" \
-	--context --toclink "/README.md" \
-	--toctext "Table Of Contents")
+#(cd ../src;perl markdown-toc.pl \
+#	--docdir "/Users/sunilsamuel/git/Work/RedHat/TKE/brms/service-sight-rules/resources/documentation" \
+#	--noverbose --baseurl "/resources/documentation/" \
+#	--context --toclink "/README.md" \
+#	--toctext "Table Of Contents")
 
 #
 # THIS IS FOR OPTAPLANNER
@@ -30,3 +30,12 @@
 # --context --toclink "/Readme.md" \
 # --toctext "Table Of Contents")
 
+
+#
+# THIS IS FOR PASSWORD-SAFE-WEB
+#
+(cd ../src;perl markdown-toc.pl \
+ --docdir "/Users/sunilsamuel/git/Personal/Password-Safe-Web/documentation" \
+ --noverbose --baseurl "/documentation/" \
+ --context --toclink "/Readme.md" \
+ --toctext "Table Of Contents")
