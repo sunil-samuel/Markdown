@@ -146,13 +146,16 @@ sub setVerbose {
 
 #
 # Take a string and normalize it so that it can be used as a anchor link
-# within the table of contents.
+# within the table of contents.  This will convert all of the parts to be
+# markdown compliant.
 #
 sub normalizeHeader {
 	my ( $self, $header ) = (@_);
 
 	$header = lc($header);
 	$header =~ s/://g;
+	$header =~ s/\(//g;
+	$header =~ s/\)//g;
 	$header =~ s/\s/-/g;
 	return $header;
 }
@@ -276,7 +279,7 @@ sub createLink {
 
 	# The next line creates a html link.
 	if ( $type eq 'html' ) {
-		$link = "<a href='$link'>" . $self->normalizeHeader($header) . "</a>";
+		$link = "<a href='$link'>$header</a>";
 	}
 	return $link;
 }
