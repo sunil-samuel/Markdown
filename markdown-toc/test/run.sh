@@ -1,9 +1,9 @@
 # A sample run using a directory.
-#(cd ../src;perl markdown-toc.pl --docdir "../test/documentation" \
-#	--noverbose --baseurl "/markdown-toc/test/documentation/" \
-#	--context --toclink "/markdown-toc/Readme.md#example" \
-#	--toctext "Table of Contents")
-#	
+(cd ../src;perl markdown-toc.pl --docdir "../test/documentation" \
+	--noverbose --baseurl "/markdown-toc/test/documentation/" \
+	--context --toclink "/markdown-toc/Readme.md#example" \
+	--toctext "Table of Contents")
+	
 # A sample run using a list of files.	
 #(cd ../src;perl markdown-toc.pl \
 #	--list ../test/documentation/01.\ document-information.md \
@@ -34,8 +34,8 @@
 #
 # THIS IS FOR PASSWORD-SAFE-WEB
 #
-(cd ../src;perl markdown-toc.pl \
- --docdir "/Users/sunilsamuel/git/Personal/Password-Safe-Web/documentation" \
- --noverbose --baseurl "/documentation/" \
- --context --toclink "/Readme.md" \
- --toctext "Table Of Contents")
+#(cd ../src;perl markdown-toc.pl \
+# --docdir "/Users/sunilsamuel/git/Personal/Password-Safe-Web/documentation" \
+# --noverbose --baseurl "/documentation/" \
+# --context --toclink "/Readme.md" \
+# --toctext "Table Of Contents")
